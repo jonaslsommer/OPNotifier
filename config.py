@@ -4,13 +4,10 @@ from pathlib import Path
 import sys
 
 # EXE folder
-base_path = Path(sys.executable).parent.parent
+base_path = Path(__file__).resolve().parent
 
 # Folder containing your data
-data_folder = base_path / "TCB_data"
-
-# Path to the .env file
-env_file = data_folder / ".env"
+env_file = base_path / "TCB_data" / ".env"
 
 # Optional: print path for debugging
 print(f"Loading .env from: {env_file}")
@@ -22,3 +19,4 @@ load_dotenv(dotenv_path=env_file)
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 GUILD_ID = os.getenv('DISCORD_GUILD_ID')
+
