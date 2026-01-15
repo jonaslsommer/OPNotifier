@@ -1,4 +1,4 @@
-from TCBNotifier import check_continuous_chapters
+from TCBNotifier import check_contiuous_button
 import json
 from pathlib import Path
 import sys
@@ -9,9 +9,8 @@ from discord import app_commands
 from config import TOKEN, GUILD, GUILD_ID
 
 print(TOKEN)
-base_path = Path(sys.executable).parent.parent
-data_folder = base_path / "TCB_data"
-json_path = data_folder / "data.json"
+base_path = Path(__file__).resolve().parent
+json_path = base_path / "TCB_data" / "data.json"
 
 intents = discord.Intents.default()
 intents.members = True
@@ -24,7 +23,7 @@ async def periodic_task():
     while not client.is_closed():
         with open(json_path,"r",encoding="utf-8") as f:
             data = json.load(f)
-        temp = await check_continuous_chapters(data['newest_known_chapter'])
+        temp = await check_contiuous_button(data['newest_known_chapter'])
         print(temp)
         if  temp[0] == data['newest_known_chapter']:
             print("tot")
